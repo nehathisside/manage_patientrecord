@@ -1,0 +1,237 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('/static/background3.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+header {
+    background: linear-gradient(90deg, #0077b6, #00b4d8);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+nav {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+nav h1 {
+    color: white;
+    font-size: 24px;
+}
+
+nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    margin: 30px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+}
+
+form.modern-form {
+    width: 65%;
+    margin: auto;
+}
+
+.patients-table-container {
+    width: 90%;
+    margin: auto;
+}
+
+.modern-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+.modern-form input,
+.modern-form select,
+.modern-form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.4);
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.modern-form select option {
+    color: #222;
+}
+
+.filterStatus option{
+    color: #222;
+}
+
+.modern-form input::placeholder {
+    color: #e0e0e0;
+}
+
+.modern-form input:focus,
+.modern-form select:focus {
+    border-color: #00b4d8;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.modern-form button {
+    background-color: #0077b6;
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition: background 0.3s;
+}
+
+.modern-form button:hover {
+    background-color: #0096c7;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filters input,
+.filters select,
+.filterStatusChange {
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.filters input::placeholder {
+    color: #f0f0f0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+th {
+    background-color: rgba(0, 119, 182, 0.8);
+    color: white;
+    font-weight: normal;
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#patientsTable select {
+    color: #222;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+#filterStatus option[value=""] {
+    color: #ffffff;
+}
+
+#suggestedDoctors {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#suggestedDoctors li {
+    background: rgba(0, 180, 216, 0.3);
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin-top: 5px;
+    color: white;
+}
+
+select {
+    font-size: 14px;
+}
+
+main h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    form.modern-form,
+    .patients-table-container {
+        width: 95%;
+    }
+}
+
+.modern-form input,
+.modern-form select,
+.modern-form textarea {
+    background-color: transparent !important;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+    transition: background-color 9999s ease-in-out 0s;
+    -webkit-text-fill-color: #ffffff !important;
+    caret-color: white;
+}

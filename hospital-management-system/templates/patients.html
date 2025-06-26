@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+    <nav>
+        <h1>Hospital Management System</h1>
+        <a href="/">Dashboard</a>
+        <a href="/patients">Patient List</a>
+    </nav>
+</header>
+<main>
+    <h2>Patients</h2>
+    <div class="filters">
+        <input type="text" id="searchId" placeholder="Search by ID" oninput="filterPatients()">
+        <input type="text" id="searchPhone" placeholder="Search by Phone" oninput="filterPatients()">
+        <input type="text" id="filterDoctor" placeholder="Filter by Doctor" oninput="filterPatients()">
+        <select id="filterStatus" class="filterStatus" onchange="filterPatients()">
+            <option value="" disabled selected>Status</option>
+            <option value="Pending">Pending</option>
+            <option value="Completed">Completed</option>
+        </select>
+    </div>
+    <table id="patientsTable">
+        <table id="patientsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Disease</th>
+                <th>Symptoms</th>
+                <th>Doctor</th>
+                <th>Status</th>
+                <th>Appointment Time</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>          
+        <tbody></tbody>
+    </table>
+</main>
+<script>
+    async function fetchAndDisplayPatients(url = '/api/patients') {
+        const res = await fetch(url);
+        const result = await res.json();
+        const data = Array.isArray(result) ? result : [result];
+        const tbody = document.querySelector("#patientsTable tbody");
+        tbody.innerHTML = '';
+        data.forEach(p => {
+        const row = `<tr>
+            <td>${p.id}</td>
+            <td>${p.name}</td>
+            <td>${p.phone}</td>
+            <td>${p.address}</td>
+            <td>${p.disease}</td>
+            <td>${p.symptoms}</td>
+            <td>${p.doctor}</td>
+            <td>
+                <select class="filterStatusChange" onchange="updateStatus('${p.id}', this.value)">
+                    <option value="Pending" ${p.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                    <option value="Completed" ${p.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                </select>
+            </td>
+            <td>${p.appointment_time.replace('T', ' / ')}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+        });
+    }
+
+    async function updateStatus(patientId, newStatus) {
+        const res = await fetch(`/api/update_status/${patientId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+        });
+        const result = await res.json();
+        alert(result.message || "Status updated");
+
+        filterPatients();
+    }
+
+
+    function filterPatients() {
+        const id = document.getElementById("searchId").value;
+        const phone = document.getElementById("searchPhone").value;
+        const doctor = document.getElementById("filterDoctor").value;
+        const status = document.getElementById("filterStatus").value;
+
+        if (id) fetchAndDisplayPatients(`/api/search_by_id/${id}`);
+        else if (phone) fetchAndDisplayPatients(`/api/search_by_phone/${phone}`);
+        else if (doctor) fetchAndDisplayPatients(`/api/filter_by_doctor/${doctor}`);
+        else if (status) fetchAndDisplayPatients(`/api/filter_by_status/${status}`);
+        else fetchAndDisplayPatients();
+    }
+
+    window.onload = fetchAndDisplayPatients;
+</script>
+</body>
+</html>
